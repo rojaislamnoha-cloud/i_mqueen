@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+import 'login_screen.dart';
+
+void main() {
+  runApp(const IMQApp());
+}
+
+class IMQApp extends StatelessWidget {
+  const IMQApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'IMQ App',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.pink,
+        scaffoldBackgroundColor: const Color(0xFFFCE4EC), // হালকা গোলাপি ব্যাকগ্রাউন্ড
+      ),
+      home: const LoginScreen(),
+    );
+  }
+}
