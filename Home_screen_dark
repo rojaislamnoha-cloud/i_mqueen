@@ -1,0 +1,122 @@
+import 'package:flutter/material.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // বাম সাইডের মেনু
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: Colors.pink,
+        title: const Text('IMQ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+        ),
+        actions: [
+          IconButton(icon: const Icon(Icons.search, color: Colors.white), onPressed: () {}),
+        ],
+      ),
+      
+      // বাম সাইড ড্রয়ার (ইমো-এর মতো)
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: const Text('User Name'),
+              accountEmail: const Text('Bio | Country'),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 40, color: Colors.pink),
+              ),
+              decoration: const BoxDecoration(color: Colors.pink),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.card_giftcard, color: Colors.pink),
+              title: const Text('Gift Badge'),
+              trailing: const Icon(Icons.star, color: Colors.pink),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.call),
+              title: const Text('Call History'),
+              onTap: () {},
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.group),
+              title: const Text('Group Chat/Room'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.person_add),
+              title: const Text('Find New Friends'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.live_tv),
+              title: const Text('Live Room'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.contacts),
+              title: const Text('Contacts'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.devices),
+              title: const Text('Linked Devices'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+
+      // মেইন বডি (চ্যাট লিস্ট)
+      body: ListView(
+        children: [
+          _buildChatItem('Family Member 1', 'Hey! How are you?', Icons.person, Colors.blue),
+          _buildChatItem('Family Group', 'Audio Call started', Icons.group, Colors.green),
+          _buildChatItem('Sister', 'Sent a photo', Icons.image, Colors.orange),
+        ],
+      ),
+      
+      // নিচে ডানদিকে কল বাটন
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        onPressed: () {},
+        child: const Icon(Icons.add_ic_call, color: Colors.white),
+      ),
+    );
+  }
+
+  Widget _buildChatItem(String name, String message, IconData icon, Color iconColor) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: iconColor.withOpacity(0.2),
+        child: Icon(icon, color: iconColor),
+      ),
+      title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+      subtitle: Text(message),
+      trailing: const Text('9:42 PM', style: TextStyle(fontSize: 12, color: Colors.grey)),
+      onTap: () {
+        // এখানে চ্যাট বা কল স্ক্রিনে যাওয়ার কোড বসবে
+      },
+    );
+  }
+}
